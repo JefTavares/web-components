@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web component</title>
+    <style>
+      ul {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <template id="template">
+      <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+      </ul>
+
+      <p>Meu Paragráfo do slot</p>
+    </template>
+
+    <my-component class="dois" titulo="Component 2">
+      <p>Tamo passando valor ao componente</p>
+      <ul slot="lista">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+      </ul>
+
+      <p slot="par">Meu Paragráfo do slot</p>
+    </my-component>
+
+    <my-component class="dois" titulo="Component 2">
+      <template>
+        <style>
+          h1 {
+            color: blue;
+          }
+          /* Psiudo classes*/
+          :host {
+            color: green;
+          }
+          /* Seleciona a raiz do shadomDom cujo o filtro css corresponda*/
+          :host(.dois) h1 {
+            text-transform: uppercase;
+          }
+          /* Olha para o elememnto pai, cujo o elemento pai seja uma div. Por isso o cponent 3 tem esse texto grande */
+          :host-context(div) p {
+            font-size: 2rem;
+          }
+          ::slotted(ul) {
+            color: gold;
+          }
+        </style>
+        <ul>
+          <li>Elemento 1</li>
+          <li>Elemento 2</li>
+          <li>Elemento 3</li>
+        </ul>
+
+        <p>Meu Paragráfo do template</p>
+      </template>
+    </my-component>
+
+    <script src="component.js"></script>
+  </body>
+</html>

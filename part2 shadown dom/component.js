@@ -2,33 +2,36 @@ class MyComponent extends HTMLElement {
   constructor() {
     super();
 
-    console.log("1- Chamou o construtor");
+    this.attachShadow({ mode: "open" });
 
     // Pega um atributo das tag
+    let conteudo = "CONTEUDO";
     if (this.hasAttribute("conteudo")) {
-      const conteudo = this.getAttribute("conteudo"); //a variavel fica dinamica ali no ${conteudo}
-      //console.log(conteudo);
-
-      this.innerHTML = `
-        <h1>My component</h1>
-        <p>${conteudo}</p>
-    `;
+      conteudo = this.getAttribute("conteudo"); //a variavel fica dinamica ali no ${conteudo}
     }
 
-    // Create a elemente
-    // const h1 = document.createElement("h1");
-    // h1.innerHTML = "My component";
-
-    // this.appendChild(h1);
-
-    //console.log(this.innerHTML);
-    //console.log(this);
-
-    //utilizando o dom pase
-    // const html = `<h1>My component</h1>`;
-    // const conteudoHTML = new DOMParser().parseFromString(html, "text/html");
-    // console.log(conteudoHTML); //é um documento html completo rss
-    // this.innerHTML = conteudoHTML.body.innerHTML;
+    //Pronto aqui vc consegue visualizar o p em preto, ele não é afetado pelo estilo definido no light dom
+    this.shadowRoot.innerHTML = `
+        <style>
+          h1 {
+            color: blue;
+          }
+          /* Psiudo classes*/
+          :host {
+            color: green;
+          }
+          /* Seleciona a raiz do shadomDom cujo o filtro css corresponda*/
+          :host(.dois) h1 {
+            text-transform: uppercase;
+          }
+          /* Olha para o elememnto pai, cujo o elemento pai seja uma div. Por isso o cponent 3 tem esse texto grande */
+          :host-context(div) p {
+            font-size: 2rem;
+          }
+        </style>
+        <h1>${this.getAttribute("titulo")}</h1>
+        <p>${conteudo}</p>
+    `;
   }
 
   attributeChangedCallback(name, oldValue, newVal) {

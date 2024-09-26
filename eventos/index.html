@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos</title>
+  </head>
+  <body>
+    <h1>Estudo sobre Event</h1>
+
+    <evt-comp></evt-comp>
+
+    <script src="index.js"></script>
+    <script>
+      document.querySelector("html").addEventListener("click-evt", (event) => {
+        alert(event.detail);
+      });
+    </script>
+  </body>
+</html>

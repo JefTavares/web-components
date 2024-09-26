@@ -6,7 +6,18 @@
     <title>Web component</title>
   </head>
   <body>
-    <my-component conteudo="Tamo passando valor ao componente"></my-component>
+    <my-component
+      titulo="Esté o titulo"
+      conteudo="Tamo passando valor ao componente"
+    ></my-component>
+    <button onclick="desconectar()">Desconectar</button>
+    <script>
+      function desconectar() {
+        //console.log("clicou");
+        const mc = document.querySelector("my-component");
+        document.body.removeChild(mc);
+      }
+    </script>
     <script src="component.js"></script>
   </body>
 </html>
